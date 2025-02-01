@@ -3,23 +3,18 @@ import ListItem from "@/components/ListItem";
 import FAQListItem from "@/components/FAQListItem";
 import Image from "next/image";
 import productDemo from "./productDemo.jpeg";
+import { auth } from "@/auth";
 
-export default function Home() {
-  const User = { name: "Sean", age: 26, address: "Annaclone" };
-  const isLoggedIn = true;
+// Insightify
+export default async function Home() {
+  const session = await auth();
 
-  const pricingFeaturesList = [
-    "Collect customer feedback",
-    "Unlimited boards",
-    "Admin dashboard",
-    "24/7 support",
-  ];
   return (
     <main>
       {/* HEADER */}
       <section className="bg-base-200">
         <div className="max-w-5xl mx-auto flex justify-between items-center px-8 py-2">
-          <div className="font-bold">CodeFastSAAS</div>
+          <div className="font-bold">Insightify</div>
           <div className="space-x-4 max-md:hidden">
             <a className="link link-hover" href="#pricingSection">
               Pricing
@@ -29,7 +24,7 @@ export default function Home() {
             </a>
           </div>
           <div>
-            <ButtonLogin isLoggedIn={isLoggedIn} User={User} />
+            <ButtonLogin session={session} />
           </div>
         </div>
       </section>
@@ -51,7 +46,7 @@ export default function Home() {
             products your customers will love.
           </div>
 
-          <ButtonLogin isLoggedIn={isLoggedIn} User={User} />
+          <ButtonLogin session={session} />
         </div>
       </section>
 
@@ -74,16 +69,17 @@ export default function Home() {
             </div>
 
             <ul className="space-y-2">
-              {pricingFeaturesList.map((priceItem) => {
+              {[
+                "Collect customer feedback",
+                "Unlimited boards",
+                "Admin dashboard",
+                "24/7 support",
+              ].map((priceItem) => {
                 return <ListItem key={priceItem}>{priceItem}</ListItem>;
               })}
             </ul>
 
-            <ButtonLogin
-              isLoggedIn={isLoggedIn}
-              User={User}
-              extraStyle="w-full"
-            />
+            <ButtonLogin session={session} extraStyle="w-full" />
           </div>
         </div>
       </section>
