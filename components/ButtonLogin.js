@@ -5,12 +5,12 @@ import { signIn } from "next-auth/react";
 const ButtonLogin = ({ session, extraStyle }) => {
   // const { isLoggedIn, User } = props; // Destructuring JS Objects
 
-  const dashboard = "/dashboard";
+  const dashboardUrl = "/dashboard";
 
   if (session) {
     return (
       <Link
-        href={dashboard}
+        href={dashboardUrl}
         className={`btn btn-primary ${extraStyle ? extraStyle : ""}`}
       >
         Welcome Back {session.user.name || "friend"}
@@ -22,7 +22,7 @@ const ButtonLogin = ({ session, extraStyle }) => {
     <button
       className={`btn btn-primary ${extraStyle ? extraStyle : ""}`}
       onClick={() => {
-        signIn(undefined, { callbackUrl: dashboard });
+        signIn(undefined, { callbackUrl: dashboardUrl });
       }}
     >
       Get started
