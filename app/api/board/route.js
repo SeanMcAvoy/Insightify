@@ -3,7 +3,6 @@ import { auth } from "@/auth";
 import connectMongo from "@/libs/mongoose";
 import User from "@/models/User";
 import Board from "@/models/Board";
-import { Promise } from "mongoose";
 
 export async function POST(req) {
   try {
@@ -41,8 +40,8 @@ export async function POST(req) {
 
 export async function DELETE(req) {
   try {
-    const { searchParams } = req.nextUrl;
-    const boardId = searchParams.get("boardId");
+    const url = new URL(req.url, process.env.NEXT_PUBLIC_BASE_URL);
+    const boardId = url.searchParams.get("boardId");
 
     if (!boardId) {
       return NextResponse.json(
@@ -51,24 +50,23 @@ export async function DELETE(req) {
       );
     }
 
-    const [session] = await Promise.all([auth()]);
+    const session = await auth();
 
     if (!session) {
       return NextResponse.json({ error: "Not Authorised" }, { status: 401 });
     }
 
-    const deleteBoardPromise = Board.deleteOne({
+    const user = await User.findById(session?.user?.id);
+
+    await Board.deleteOne({
       _id: boardId,
-      userId: session.user.id,
+      userId: session?.user?.id,
     });
-    const updateUserPromise = User.updateOne(
-      { _id: session.user.id },
-      { $pull: { boards: boardId } }
-    );
 
-    await Promise.all([deleteBoardPromise, updateUserPromise]);
+    user.boards = user.boards.filter((id) => id.toString() !== boardId);
+    await user.save();
 
-    return NextResponse.json({});
+    return NextResponse.json({ status: 201 });
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
