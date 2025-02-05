@@ -62,10 +62,7 @@ export async function DELETE(req) {
     });
 
     const user = await User.findById(session?.user?.id);
-    user.boards = user.boards.filter((id) => {
-      console.log(id);
-      return id.toString() !== boardId;
-    });
+    user.boards = user.boards.filter((id) => id.toString() !== boardId);
     await user.save();
 
     return NextResponse.json({});
