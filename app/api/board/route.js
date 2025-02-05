@@ -66,7 +66,7 @@ export async function DELETE(req) {
     user.boards = user.boards.filter((id) => id.toString() !== boardId);
     await user.save();
 
-    return NextResponse.json({});
+    return NextResponse.json({ status: 201 });
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
