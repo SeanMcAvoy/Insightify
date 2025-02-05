@@ -18,8 +18,8 @@ const ButtonDeleteBoard = ({ boardId }) => {
 
         toast.success("Board deleted!");
 
-        //router.push("/dashboard");
-        router.refresh("/dashboard");
+        router.push("/dashboard");
+        //router.refresh("/dashboard");
       }
     } catch (error) {
       const errorMessage =
