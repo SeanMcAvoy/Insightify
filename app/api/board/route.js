@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import connectMongo from "@/libs/mongoose";
 import User from "@/models/User";
 import Board from "@/models/Board";
+import { Promise } from "mongoose";
 
 export async function POST(req) {
   try {
@@ -50,23 +51,24 @@ export async function DELETE(req) {
       );
     }
 
-    const session = await auth();
+    const [session] = await Promise.all([auth()]);
 
     if (!session) {
       return NextResponse.json({ error: "Not Authorised" }, { status: 401 });
     }
 
-    const user = await User.findById(session?.user?.id);
-
-    await Board.deleteOne({
+    const deleteBoardPromise = Board.deleteOne({
       _id: boardId,
-      userId: session?.user?.id,
+      userId: session.user.id,
     });
+    const updateUserPromise = User.updateOne(
+      { _id: session.user.id },
+      { $pull: { boards: boardId } }
+    );
 
-    user.boards = user.boards.filter((id) => id.toString() !== boardId);
-    await user.save();
+    await Promise.all([deleteBoardPromise, updateUserPromise]);
 
-    return NextResponse.json({ status: 201 });
+    return NextResponse.json({});
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
