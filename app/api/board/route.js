@@ -24,6 +24,13 @@ export async function POST(req) {
 
     const user = await User.findById(session.user.id);
 
+    if (!user.hasAccess) {
+      return NextResponse.json(
+        { error: "Please subcribe first" },
+        { status: 403 }
+      );
+    }
+
     const board = await Board.create({
       userId: user._id,
       name: body.name,
@@ -59,6 +66,13 @@ export async function DELETE(req) {
     await connectMongo();
 
     const user = await User.findById(session?.user?.id);
+
+    if (!user.hasAccess) {
+      return NextResponse.json(
+        { error: "Please subcribe first" },
+        { status: 403 }
+      );
+    }
 
     await Board.deleteOne({
       _id: boardId,

@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
+// eslint-disable-next-line no-unused-vars
 import User from "@/models/User";
+// eslint-disable-next-line no-unused-vars
 import Board from "@/models/Board";
 
 // const connectMongo = async () => {
