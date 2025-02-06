@@ -6,6 +6,8 @@ import User from "@/models/User";
 
 export async function POST(req) {
   try {
+    // 1. Verify the webhook event is from Stripe
+
     const stripe = new Stripe(process.env.STRIPE_API_KEY);
 
     const body = await req.text();
@@ -21,7 +23,8 @@ export async function POST(req) {
     const { data, type } = event; // data will be send back information such as name of customer, email, invoice id, customer id etc
 
     if (type === "checkout.session.completed") {
-      // grant permission to product
+      // ✅ Grant access to the product
+
       await connectMongo();
 
       const user = await User.findById(data.object.client_reference_id);
@@ -31,10 +34,11 @@ export async function POST(req) {
 
       await user.save();
     } else if (type === "customer.subscription.deleted") {
-      // remove permission to product
+      // ❌ Revoke access to the product (subscription cancelled or non-payment)
+
       await connectMongo();
 
-      const user = await User.findByOne({
+      const user = await User.findOne({
         customerId: data.object.customer,
       });
 
@@ -42,8 +46,8 @@ export async function POST(req) {
 
       await user.save();
     }
-  } catch (error) {
-    console.error("Stripe error: " + error?.message);
+  } catch (e) {
+    console.error("Stripe error: " + e?.message);
   }
 
   return NextResponse.json({});

@@ -18,7 +18,6 @@ export async function POST(req) {
     const session = await auth();
 
     await connectMongo();
-
     const user = await User.findById(session.user.id);
 
     const stripe = new Stripe(process.env.STRIPE_API_KEY);
@@ -27,6 +26,7 @@ export async function POST(req) {
       customer: user.customerId,
       return_url: body.returnUrl,
     });
+
     return NextResponse.json({ url: stripeCustomerPortal.url });
   } catch (e) {
     return NextResponse.json({ error: e.message }, { status: 500 });
