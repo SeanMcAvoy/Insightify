@@ -40,7 +40,7 @@ const FormAddPost = ({ boardId }) => {
       className="bg-base-100 p-8 rounded-3xl space-y-8 w-full md:max-w-sm shrink-0 md:sticky top-8"
       onSubmit={handleSubmit}
     >
-      <p className="font-bold text-lg">Suggest a Feature</p>
+      <p className="font-bold text-lg">Suggest a Feature / Feedback</p>
       <label className="form-control w-full">
         <div className="label">
           <span className="label-text">Short, descritive title</span>
