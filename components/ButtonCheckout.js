@@ -30,7 +30,7 @@ const ButtonCheckout = () => {
 
   return (
     <button className="btn btn-primary" onClick={() => handleSubcribe()}>
-      Subscribe
+      Purchase
       {isLoading && (
         <span className="loading loading-spinner loading-xs"></span>
       )}

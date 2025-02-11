@@ -24,7 +24,7 @@ export async function POST(req) {
     const stripe = new Stripe(process.env.STRIPE_API_KEY);
 
     const stripeCheckoutSession = await stripe.checkout.sessions.create({
-      mode: "subscription",
+      mode: "payment",
       line_items: [
         {
           price: process.env.STRIPE_PRICE_ID,

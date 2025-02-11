@@ -42,7 +42,7 @@ export default async function Home() {
             Collect Customer feedback to build better products
           </h1>
           <div className="opacity-90 mb-10">
-            Create a feedback board in minutes, prioritise features, and build
+            Create a feedback board in minutes, prioritise feedback, and build
             products your customers will love.
           </div>
 
@@ -64,7 +64,7 @@ export default async function Home() {
             <div className="flex gap-2 items-baseline">
               <div className="text-4xl font-black">£15</div>
               <div className="uppercase text-sm font-medium opacity-60">
-                /month
+                / lifetime access
               </div>
             </div>
 
@@ -73,7 +73,7 @@ export default async function Home() {
                 "Collect customer feedback",
                 "Unlimited boards",
                 "Admin dashboard",
-                "24/7 support",
+                "Mobile-Friendly Forms",
               ].map((priceItem) => {
                 return <ListItem key={priceItem}>{priceItem}</ListItem>;
               })}
