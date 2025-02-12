@@ -8,7 +8,7 @@ const config = {
   providers: [
     Resend({
       apiKey: process.env.RESEND_KEY,
-      from: "noreply@resend.Insightify.cam",
+      from: "noreply@resend.insightify.cam",
       subject: "Sign in to Insightify",
       name: "Email",
     }),
