@@ -105,7 +105,7 @@ export default async function Home() {
                 {
                   question: "Can I get a refund?",
                   answer:
-                    "Yes but you will access to Insightify and if you wish to reuse the service you will have to pay again.",
+                    "Yes! You can request a refund within 7 days of your purchase. Reach out by email.",
                 },
                 {
                   question: "I have another question",
