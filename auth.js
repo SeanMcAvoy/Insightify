@@ -9,6 +9,7 @@ const config = {
     Resend({
       apiKey: process.env.RESEND_KEY,
       from: "noreply@resend.Insightify.cam",
+      subject: "Sign in to Insightify",
       name: "Email",
     }),
     Google({

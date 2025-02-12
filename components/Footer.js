@@ -42,25 +42,19 @@ const Footer = () => {
               </div>
 
               <div className="flex flex-col justify-center items-center md:items-start gap-2 mb-10 text-sm">
-                {/* {config.resend.supportEmail && (
+                {"Support Email" && (
                   <a
-                    href={`mailto:${config.resend.supportEmail}`}
+                    href={`mailto:contact@insightify.cam`}
                     target="_blank"
                     className="link link-hover"
                     aria-label="Contact Support"
                   >
                     Support
                   </a>
-                )} */}
+                )}
                 <Link href="/#pricing" className="link link-hover">
                   Pricing
                 </Link>
-                {/* <Link href="/blog" className="link link-hover">
-                  Blog
-                </Link>
-                <a href="/#" target="_blank" className="link link-hover">
-                  Affiliates
-                </a> */}
               </div>
             </div>
 

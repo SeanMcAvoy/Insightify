@@ -109,7 +109,8 @@ export default async function Home() {
                 },
                 {
                   question: "I have another question",
-                  answer: "Loreum Ipseum",
+                  answer:
+                    "Perfect email any any further questions to contact@insightify.cam. I will get back to any questions within 24 hours.",
                 },
               ].map((qa) => (
                 <FAQListItem key={qa.question} qa={qa} />
