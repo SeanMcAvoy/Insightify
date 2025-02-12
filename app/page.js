@@ -4,115 +4,121 @@ import FAQListItem from "@/components/FAQListItem";
 import Image from "next/image";
 import productDemo from "./productDemo.jpeg";
 import { auth } from "@/auth";
+import Footer from "@/components/Footer";
 
 // Insightify
 export default async function Home() {
   const session = await auth();
 
   return (
-    <main>
-      {/* HEADER */}
-      <section className="bg-base-200">
-        <div className="max-w-5xl mx-auto flex justify-between items-center px-8 py-2">
-          <div className="font-bold">Insightify</div>
-          <div className="space-x-4 max-md:hidden">
-            <a className="link link-hover" href="#pricingSection">
-              Pricing
-            </a>
-            <a className="link link-hover" href="#FAQSection">
-              FAQ
-            </a>
+    <>
+      <main>
+        {/* HEADER */}
+        <section className="bg-base-200">
+          <div className="max-w-5xl mx-auto flex justify-between items-center px-8 py-2">
+            <div className="font-bold">Insightify</div>
+            <div className="space-x-4 max-md:hidden">
+              <a className="link link-hover" href="#pricingSection">
+                Pricing
+              </a>
+              <a className="link link-hover" href="#FAQSection">
+                FAQ
+              </a>
+            </div>
+            <div>
+              <ButtonLogin session={session} />
+            </div>
           </div>
+        </section>
+
+        {/* HERO */}
+        <section className="px-8 text-center lg:text-left py-32 max-w-5xl mx-auto flex flex-col lg:flex-row gap-14 items-center lg:items-start">
+          <Image
+            src={productDemo}
+            alt="Product Demo"
+            className="w-96 rounded-xl"
+          />
+
           <div>
-            <ButtonLogin session={session} />
-          </div>
-        </div>
-      </section>
-
-      {/* HERO */}
-      <section className="px-8 text-center lg:text-left py-32 max-w-5xl mx-auto flex flex-col lg:flex-row gap-14 items-center lg:items-start">
-        <Image
-          src={productDemo}
-          alt="Product Demo"
-          className="w-96 rounded-xl"
-        />
-
-        <div>
-          <h1 className="text-4xl font-extrabold mb-6 lg:text-5xl">
-            Collect Customer feedback to build better products
-          </h1>
-          <div className="opacity-90 mb-10">
-            Create a feedback board in minutes, prioritise feedback, and build
-            products your customers will love.
-          </div>
-
-          <ButtonLogin session={session} />
-        </div>
-      </section>
-
-      {/* PRICING */}
-      <section className="bg-base-200" id="pricingSection">
-        <div className="py-32 px8 max-w-3xl mx-auto">
-          <p className="text-sm uppercase font-medium text-center text-primary mb-4">
-            Pricing
-          </p>
-          <h2 className="text-3xl font-extrabold mb-12 lg:text-4xl text-center">
-            A pricing that adapts to your needs
-          </h2>
-
-          <div className="p-8 bg-base-100 max-w-96 rounded-3xl mx-auto space-y-6">
-            <div className="flex gap-2 items-baseline">
-              <div className="text-4xl font-black">£15</div>
-              <div className="uppercase text-sm font-medium opacity-60">
-                / lifetime access
-              </div>
+            <h1 className="text-4xl font-extrabold mb-6 lg:text-5xl">
+              Collect Customer feedback to build better products
+            </h1>
+            <div className="opacity-90 mb-10">
+              Create a feedback board in minutes, prioritise feedback, and build
+              products your customers will love.
             </div>
 
-            <ul className="space-y-2">
-              {[
-                "Collect customer feedback",
-                "Unlimited boards",
-                "Admin dashboard",
-                "Mobile-Friendly Forms",
-              ].map((priceItem) => {
-                return <ListItem key={priceItem}>{priceItem}</ListItem>;
-              })}
-            </ul>
-
-            <ButtonLogin session={session} extraStyle="w-full" />
+            <ButtonLogin session={session} />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQ */}
-      <section id="FAQSection">
-        <div className="py-32 px8 max-w-3xl mx-auto">
-          <p className="text-sm uppercase font-medium text-center text-primary mb-4">
-            FAQ
-          </p>
-          <h2 className="text-3xl font-extrabold mb-12 lg:text-4xl text-center">
-            Frequently Asked Questions
-          </h2>
-          <ul className="max-w-lg mx-auto">
-            {[
-              {
-                question: "What do I get exactly?",
-                answer: "Loreum Ipseum",
-              },
-              {
-                question: "Can I get a refund?",
-                answer: "Loreum Ipseum",
-              },
-              {
-                question: "I have another question",
-                answer: "Loreum Ipseum",
-              },
-            ].map((qa) => (
-              <FAQListItem key={qa.question} qa={qa} />
-            ))}
-          </ul>
-        </div>
-      </section>
-    </main>
+        {/* PRICING */}
+        <section className="bg-base-200" id="pricingSection">
+          <div className="py-32 px8 max-w-3xl mx-auto">
+            <p className="text-sm uppercase font-medium text-center text-primary mb-4">
+              Pricing
+            </p>
+            <h2 className="text-3xl font-extrabold mb-12 lg:text-4xl text-center">
+              A pricing that adapts to your needs
+            </h2>
+
+            <div className="p-8 bg-base-100 max-w-96 rounded-3xl mx-auto space-y-6">
+              <div className="flex gap-2 items-baseline">
+                <div className="text-4xl font-black">£15</div>
+                <div className="uppercase text-sm font-medium opacity-60">
+                  / lifetime access
+                </div>
+              </div>
+
+              <ul className="space-y-2">
+                {[
+                  "Collect customer feedback",
+                  "Unlimited boards",
+                  "Admin dashboard",
+                  "Mobile-Friendly Forms",
+                ].map((priceItem) => {
+                  return <ListItem key={priceItem}>{priceItem}</ListItem>;
+                })}
+              </ul>
+
+              <ButtonLogin session={session} extraStyle="w-full" />
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="FAQSection">
+          <div className="py-32 px8 max-w-3xl mx-auto">
+            <p className="text-sm uppercase font-medium text-center text-primary mb-4">
+              FAQ
+            </p>
+            <h2 className="text-3xl font-extrabold mb-12 lg:text-4xl text-center">
+              Frequently Asked Questions
+            </h2>
+            <ul className="max-w-lg mx-auto">
+              {[
+                {
+                  question: "What do I get exactly?",
+                  answer:
+                    "Insightify is the ultimate feedback collection tool that makes gathering insights easy and engaging. Create customizable feedback forms, share the link with your audience, and collect valuable responses in an interactive format. Users can upvote comments just like on Reddit, helping you quickly identify the most relevant and impactful feedback. Whether for businesses, creators, or teams, Insightify streamlines feedback collection and prioritization in a dynamic way.",
+                },
+                {
+                  question: "Can I get a refund?",
+                  answer:
+                    "Yes but you will access to Insightify and if you wish to reuse the service you will have to pay again.",
+                },
+                {
+                  question: "I have another question",
+                  answer: "Loreum Ipseum",
+                },
+              ].map((qa) => (
+                <FAQListItem key={qa.question} qa={qa} />
+              ))}
+            </ul>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }
