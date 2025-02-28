@@ -55,6 +55,12 @@ const Footer = () => {
                 <Link href="/#pricing" className="link link-hover">
                   Pricing
                 </Link>
+                <Link
+                  href="https://sidesync.co.uk/"
+                  className="link link-hover"
+                >
+                  SideSync
+                </Link>
               </div>
             </div>
 
