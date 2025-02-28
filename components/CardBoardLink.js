@@ -6,7 +6,7 @@ const CardBoardLink = ({ boardId }) => {
   const boardLink = `${
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://seanmcavoy.digital/"
+      : "https://www.insightify.cam/"
   }/b/${boardId}`;
 
   const copyLink = () => {
